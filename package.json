@@ -1,0 +1,25 @@
+{
+  "name": "test-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "minecraft-data": "^2.93.0",
+    "node-canvas-webgl": "^0.2.6",
+    "prismarine-block": "^1.10.3",
+    "prismarine-chunk": "^1.26.0",
+    "prismarine-nbt": "^1.6.0",
+    "prismarine-viewer": "^1.20.0",
+    "prismarine-world": "^3.6.0",
+    "three": "^0.132.2",
+    "three-gltf-exporter": "0.0.1",
+    "vblob": "^1.0.2",
+    "vec3": "^0.1.7"
+  }
+}
