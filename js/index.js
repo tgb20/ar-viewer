@@ -1,13 +1,10 @@
-let scene, exporter;
+let scene;
 
 window.onload = () => {
     document.getElementById('file-input').addEventListener('change', readSingleFile, false);
     scene = new THREE.Scene();
     scene.background = new THREE.Color('lightblue')
     const camera = new THREE.PerspectiveCamera(75, 640 / 480, 0.1, 1000);
-
-    exporter = new THREE.GLTFExporter();
-
     const ambientLight = new THREE.AmbientLight(0xcccccc)
     scene.add(ambientLight)
 
@@ -41,7 +38,7 @@ function readSingleFile(e) {
     reader.onload = function (e) {
         var contents = e.target.result;
         var buffer = stringToArrayBuffer(contents);
-        nbt.parse(buffer, function (error, data) {
+        nbt.parse(buffer, async function (error, data) {
             if (error) { throw error; }
 
             // Load Palette
@@ -73,11 +70,16 @@ function readSingleFile(e) {
                 }
             });
 
-            exporter.parse( scene, function ( gltf ) {
-                const blob = new Blob([gltf], {type: 'text/json'});
-                let url = window.URL.createObjectURL(blob);
-                document.getElementById('viewer').src = url;                
+            const gltfExporter = new THREE.GLTFExporter();
+            gltfExporter.parse( scene, function ( gltf ) {
+                console.log(gltf);
             }, {} );
+
+            const appleExporter = new THREE.USDZExporter();
+            const arraybuffer = await appleExporter.parse(scene);
+            const blob = new Blob([arraybuffer], { type: 'application/octet-stream' });
+            const link = document.getElementById('link');
+            link.href = URL.createObjectURL(blob);
         });
     };
     reader.readAsBinaryString(file);
