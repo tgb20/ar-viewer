@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
     "minecraft-data": "^2.93.0",
     "node-canvas-webgl": "^0.2.6",
     "prismarine-block": "^1.10.3",
